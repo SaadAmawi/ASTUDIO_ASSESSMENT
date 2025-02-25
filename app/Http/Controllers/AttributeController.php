@@ -16,6 +16,15 @@ class AttributeController extends Controller
         return response()->json($attributes,201);
 
     }
+    public function show($id){
+        $attributes = Attribute::find($id);
+        if(!$attributes){
+            return response()->json('No Attributes Available',404);
+        }
+        return response()->json($attributes,201);
+
+    }
+
     public function store(Request $request)
     {
         $request->validate([

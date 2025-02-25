@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
-        if ($projects->isEmpty()) {
-            return response()->json(['message' => 'No projects found.'], 404);
+        $query = Project::query();
+        if ($filters = $request->input('filters')) {
+            $this->filter($query, $filters);
         }
+        $projects = $query->get();
+
         return response()->json($projects);
     }
     
@@ -50,25 +52,59 @@ class ProjectController extends Controller
         return response()->json(['message' => 'Project deleted']);
     }
 
-//     public function filter(Request $request)
-// {
-//     $query = Project::query();
+    private function filter($query, $filters)
+{
+    foreach ($filters as $key => $value) {
+        // Determine the operator (default is '=')
+        $operator = '=';
+        if (strpos($value, ':') !== false) {
+            list($value, $operator) = explode(':', $value);
+        }
 
-//     foreach ($request->filters as $attribute => $value) {
-//         $attributeModel = Attribute::where('name', $attribute)->first();
+        // Handle regular column filtering (e.g., name, status)
+        if (in_array($key, ['name', 'status'])) {
+            if ($operator === 'LIKE') {
+                $query->where($key, 'LIKE', "%$value%");
+            } elseif ($operator === '>') {
+                $query->where($key, '>', $value);
+            } elseif ($operator === '<') {
+                $query->where($key, '<', $value);
+            } else {
+                $query->where($key, '=', $value);
+            }
+        }
 
-//         if ($attributeModel) {
-//             $query->whereHas('attributeValues', function ($query) use ($attributeModel, $value) {
-//                 $query->where('attribute_id', $attributeModel->id)
-//                       ->where('value', $value);
-//             });
-//         }
-//     }
+        // Handle EAV filtering for dynamic attributes using the attribute_values table
+        elseif ($key && $value) {
+            $query->whereHas('attributeValues', function ($query) use ($key, $value, $operator) {
+                // Filter by attribute name and value
+                $query->where('attribute_values.attribute_id', function ($query) use ($key) {
+                    $query->select('id')->from('attributes')->where('name', $key);
+                });
 
-//     $projects = $query->get();
+                // Apply the operator for value comparison
+                if (is_numeric($value)) {
+                    // If the value is numeric, cast it and apply comparison
+                    if ($operator === '>') {
+                        $query->where('value', '>', $value);
+                    } elseif ($operator === '<') {
+                        $query->where('value', '<', $value);
+                    } else {
+                        $query->where('value', '=', $value);
+                    }
+                } else {
+                    // For non-numeric values (e.g., text), use LIKE for matching
+                    if ($operator === 'LIKE') {
+                        $query->where('value', 'LIKE', "%$value%");
+                    } else {
+                        $query->where('value', '=', $value);
+                    }
+                }
+            });
+        }
+    }
+}
 
-//     return response()->json($projects);
-// }
 
 public function updateAttributes(Request $request, $projectId)
     {
