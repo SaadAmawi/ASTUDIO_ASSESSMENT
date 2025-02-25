@@ -1,54 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Attribute;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AttributeController extends Controller
 {
+
+    public function index(){
+        $attributes = Attribute::all();
+        if(!$attributes){
+            return response()->json('No Attributes Available',404);
+        }
+        return response()->json($attributes,201);
+
+    }
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'type' => 'required|in:text,date,number,select',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'type' => 'required|in:text,date,number,select',
+        ]);
 
-    $attribute = Attribute::create($validatedData);
-    return response()->json($attribute, 201);
-}
+        $attribute = Attribute::create($request->all());
 
-public function update(Request $request, $id)
-{
-    $attribute = Attribute::findOrFail($id);
+        return response()->json($attribute, 201);
+    }
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'type' => 'required|in:text,date,number,select',
-    ]);
+    public function update(Request $request, $id)
+    {
+        $attribute = Attribute::find($id);
 
-    $attribute->update($request->all());
-    return response()->json($attribute);
-}
+        if (!$attribute) {
+            return response()->json(['message' => 'Attribute not found'], 404);
+        }
 
-public function destroy($id)
-{
-    $attribute = Attribute::findOrFail($id);
-    $attribute->delete();
+        $attribute->update($request->all());
 
-    return response()->json(['message' => 'Attribute deleted successfully']);
-}
+        return response()->json($attribute);
+    }
 
-public function show($id)
-{
-    $attribute = Attribute::findOrFail($id);
-    return response()->json($attribute);
-}
-
-public function index()
-{
-    $attributes = Attribute::all();
-    return response()->json($attributes);
-}
-
+    public function destroy(Attribute $attribute)
+    {
+        $attribute->delete();
+        return response()->json(['message' => 'Attribute deleted']);
+    }
 }

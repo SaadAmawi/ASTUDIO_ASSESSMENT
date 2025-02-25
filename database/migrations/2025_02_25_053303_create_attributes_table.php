@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Name of the attribute (e.g., department, start_date)
-            $table->enum('type', ['text', 'date', 'number', 'select']); // Type of the attribute
+            $table->string('name'); 
+            $table->enum('type', ['text', 'date', 'number', 'select']); 
             $table->timestamps();
         });
     }
