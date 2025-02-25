@@ -1,14 +1,13 @@
-Setup Instructions
-1. Clone the Repository
-First, clone the repository to your local machine by running the following command:
-\n
-\n
-git clone https://github.com/yourusername/your-repository-name.git \n\n
-Navigate to the project directory:
+Setup Instructions<br>
+1. Clone the Repository<br>
+First, clone the repository to your local machine by running the following command:<br>
 
-cd your-repository-name
-2. Install Dependencies
-Make sure you have Composer installed. If not, you can download it from here.
+git clone https://github.com/yourusername/your-repository-name.git.<br>
+Navigate to the project directory:<br>
+
+cd your-repository-name<br>
+2. Install Dependencies<br>
+Make sure you have Composer installed. If not, you can download it from here.<br>
 
 Once Composer is installed, run the following command to install all the necessary dependencies:
 
