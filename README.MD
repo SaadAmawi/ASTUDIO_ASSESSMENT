@@ -1,5 +1,5 @@
-Setup Instructions<br>
-<b>1. Clone the Repository</b><br>
+<h1>Setup Instructions</h1><br>
+<h2>1. Clone the Repository</h2><br>
 First, clone the repository to your local machine by running the following command:<br>
 
 git clone https://github.com/yourusername/your-repository-name.git.<br><br>
