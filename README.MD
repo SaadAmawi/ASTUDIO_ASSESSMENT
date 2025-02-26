@@ -23,7 +23,7 @@ php artisan key:generate<br>
 
 This will set a random key in your .env file for encryption.<br><br><br>
 
-5. Set Up the Database<br>
+5</.> Set Up the Database<br>
 Make sure you have a SQLite or MySQL database set up.<br>
 
 For SQLite:<br>
