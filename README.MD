@@ -2,7 +2,7 @@
 <h2>1. Clone the Repository</h2><br>
 First, clone the repository to your local machine by running the following command:<br>
 
-git clone https://github.com/yourusername/your-repository-name.git.<br><br>
+git clone https://github.com/SaadAmawi/ASTUDIO_ASSESSMENT.git<br><br>
 Navigate to the project directory:<br>
 
 cd your-repository-name<br><br><br>
