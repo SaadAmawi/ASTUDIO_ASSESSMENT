@@ -1,29 +1,29 @@
 Setup Instructions<br>
-1. Clone the Repository<br>
+<b>1. Clone the Repository</b><br>
 First, clone the repository to your local machine by running the following command:<br>
 
 git clone https://github.com/yourusername/your-repository-name.git.<br><br>
 Navigate to the project directory:<br>
 
 cd your-repository-name<br><br><br>
-2. Install Dependencies<br>
+<b>2. Install Dependencies</b><br>
 Make sure you have Composer installed. If not, you can download it from here.<br>
 
 Once Composer is installed, run the following command to install all the necessary dependencies:<br>
 
 composer install<br><br><br>
-3. Create a .env File<br>
+<b>3. Create a .env File</b><br>
 Copy the .env.example file to create your .env file:<br>
 
 cp .env.example .env<br><br><br>
-4. Generate the Application Key<br>
+<b>4. Generate the Application Key</b><br>
 Run the following command to generate the application key:<br>
 
 php artisan key:generate<br>
 
 This will set a random key in your .env file for encryption.<br><br><br>
 
-5.  Set Up the Database<br>
+<b>5.  Set Up the Database</b><br>
 Make sure you have a SQLite or MySQL database set up.<br>
 
 For SQLite:<br>
@@ -45,7 +45,7 @@ DB_DATABASE=your_database_name<br>
 DB_USERNAME=your_database_user<br>
 DB_PASSWORD=your_database_password<br><br><br>
 
-6.  Run Migrations and Seeders<br>
+<b>6.  Run Migrations and Seeders</b><br>
 Now, run the database migrations to create the required tables:<br><br>
 
 php artisan migrate<br><br>
@@ -55,7 +55,7 @@ If you have seeders for testing, you can run them to populate the database with 
 
 php artisan db:seed<br><br><br>
 
-7. Install Laravel Passport for Authentication<br>
+<b>7. Install Laravel Passport for Authentication</b><br>
 Since the app uses Laravel Passport for API authentication, you need to install the Passport package and set it up.<br><br>
 
 Run the following command to install Passport:<br><br>
@@ -73,17 +73,17 @@ use Laravel\Passport\Passport;<br><br>
 Finally, in your .env file, make sure the APP_URL is set correctly:<br>
 <br>
 APP_URL=http://yourappurl(localhost)<br><br><br>
-8. Serve the Application<br>
+<b>8. Serve the Application</b><br>
 You can now run the application locally by using Laravel builtin server:<br>
 <br>
 php artisan serve<br>
 This will start the server, and your app will be accessible at:<br>
 <br>
 http://localhost:port<br><br><br>
-9. Testing the API<br>
+<b>9. Testing the API</b><br>
 Now, you can use Postman or any API client to test the various endpoints. Remember to authenticate using Bearer tokens after registering or logging in.<br>
 <br>
-10. Additional Configuration (Optional)<br>
+<b>10. Additional Configuration (Optional)</b><br>
 Caching: You may need to clear the applications cache during development. You can do so with the following command:<br>
 <br>
 php artisan cache:clear<br>
