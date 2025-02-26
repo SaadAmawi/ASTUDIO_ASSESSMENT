@@ -7,11 +7,10 @@ Navigate to the project directory:<br>
 
 cd your-repository-name<br><br><br>
 <h2>2. Install Dependencies</h2><br>
-Make sure you have Composer installed. If not, you can download it from here.<br>
+Make sure you have Composer installed.<br>
 
 Once Composer is installed, run the following command to install all the necessary dependencies:<br>
-
-composer install<br><br><br>
+<i>composer install</i><br><br><br>
 <h2>3. Create a .env File</h2><br>
 Copy the .env.example file to create your .env file:<br>
 
