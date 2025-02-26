@@ -23,7 +23,7 @@ php artisan key:generate<br>
 
 This will set a random key in your .env file for encryption.<br><br><br>
 
-5</.> Set Up the Database<br>
+5.  Set Up the Database<br>
 Make sure you have a SQLite or MySQL database set up.<br>
 
 For SQLite:<br>
@@ -45,7 +45,7 @@ DB_DATABASE=your_database_name<br>
 DB_USERNAME=your_database_user<br>
 DB_PASSWORD=your_database_password<br><br><br>
 
-6. Run Migrations and Seeders<br>
+6.  Run Migrations and Seeders<br>
 Now, run the database migrations to create the required tables:<br><br>
 
 php artisan migrate<br><br>
@@ -70,12 +70,6 @@ Next, in your AuthServiceProvider (located at app/Providers/AuthServiceProvider.
 
 use Laravel\Passport\Passport;<br><br>
 
-public function boot()<br>
-{<br>
-    $this->registerPolicies();<br>
-<br>
-    Passport::routes();<br>
-}<br>
 Finally, in your .env file, make sure the APP_URL is set correctly:<br>
 <br>
 APP_URL=http://yourappurl(localhost)<br><br><br>
